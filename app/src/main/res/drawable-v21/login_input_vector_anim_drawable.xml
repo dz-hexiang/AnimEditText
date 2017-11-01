@@ -1,0 +1,76 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="90dp"
+    android:height="12dp"
+    android:viewportWidth="90.0"
+    android:viewportHeight="14.0">
+
+
+    <path
+        android:strokeColor="@color/login_input_normal"
+        android:pathData="
+        M65,1
+        h18,0
+        q6,0 6,6
+        q0,6 -6,6
+        h-76
+        q-6,0 -6,-6
+        q0,-6,6,-6
+        h18,0
+        " />
+    <!--向右动画到底部-->
+    <path
+        android:name="right"
+        android:strokeColor="@color/login_input_normal"
+        android:pathData="
+                    M45,1
+                    h20,0
+                    " />
+
+    <!--向左动画到底部-->
+    <path
+        android:name="left"
+        android:strokeColor="@color/login_input_normal"
+        android:pathData="
+                    M45,1
+                    h-20,0
+                    " />
+
+    <!--默认缺失-->
+    <!--<path-->
+    <!--android:strokeColor="#fff"-->
+    <!--android:pathData="-->
+    <!--M56,1-->
+    <!--h27,0-->
+    <!--q6,0 6,6-->
+    <!--q0,6 -6,6-->
+    <!--h-76-->
+    <!--q-6,0 -6,-6-->
+    <!--q0,-6,6,-6-->
+    <!--h27,0-->
+    <!--" />-->
+
+    <!--&lt;!&ndash;全向右动画到底部&ndash;&gt;-->
+    <!--<path-->
+        <!--android:name="right"-->
+        <!--android:strokeColor="#f24e4e"-->
+        <!--android:pathData="-->
+                    <!--M56,1-->
+                    <!--h27,0-->
+                    <!--q6,0 6,6-->
+                    <!--q0,6 -6,6-->
+                    <!--h-38-->
+                    <!--" />-->
+
+    <!--&lt;!&ndash;向左动画到底部&ndash;&gt;-->
+
+    <!--<path-->
+        <!--android:name="left"-->
+        <!--android:strokeColor="#42b622"-->
+        <!--android:pathData="-->
+                    <!--M34,1-->
+                    <!--h-27,0-->
+                    <!--q-6,0 -6,6-->
+                    <!--q0,6 6,6-->
+                    <!--h38-->
+                    <!--" />-->
+</vector>

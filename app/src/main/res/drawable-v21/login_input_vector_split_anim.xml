@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/login_input_vector_anim_drawable">
+
+
+    <target
+        android:name="left"
+        android:animation="@anim/login_input_split_anim" />
+    <target
+        android:name="right"
+        android:animation="@anim/login_input_split_anim" />
+</animated-vector>

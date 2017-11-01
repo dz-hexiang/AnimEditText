@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 仿ios输入框动画属性 -->
+    <declare-styleable name="animedittext_style" >
+        <attr name="text" format="string" />
+        <attr name="textColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="hit" format="string"/>
+        <attr name="hitColor" format="color"/>
+        <attr name="hitSize" format="dimension"/>
+        <attr name="hitStyleAttr" format="reference" />
+        <attr name="isPwd" format="boolean"/>
+        <attr name="isNumber" format="boolean"/>
+        <attr name="maxLength" format="integer"/>
+    </declare-styleable>
+</resources>
