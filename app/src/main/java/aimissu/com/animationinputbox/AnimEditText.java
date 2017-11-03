@@ -31,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 
 
@@ -41,7 +42,6 @@ import io.reactivex.functions.Consumer;
  */
 
 public  class AnimEditText extends LinearLayout {
-
     private TextInputEditText mEditText;
     private TextInputLayout mEditTextContainer;
 
@@ -60,27 +60,28 @@ public  class AnimEditText extends LinearLayout {
     private boolean mIsNumber;
 
 
-    @SuppressLint("NewApi")
+    
     public AnimEditText(Context context) {
         super(context);
        initView(context,null,-1);
     }
 
 
-    @SuppressLint("NewApi")
+    
     public AnimEditText(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView(context, attrs,-1);
     }
 
 
-    @SuppressLint("NewApi")
+
     public AnimEditText(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         initView(context, attrs,defStyleAttr);
 
     }
+
 
 
     @SuppressLint("NewApi")
@@ -95,7 +96,7 @@ public  class AnimEditText extends LinearLayout {
     }
 
 
-    @SuppressLint("NewApi")
+
     public void initView(Context context, AttributeSet attrs, int defStyleRes)
     {
         LayoutInflater.from(context).inflate(R.layout.view_anim_edit_text, this);
@@ -162,7 +163,13 @@ public  class AnimEditText extends LinearLayout {
         mMergeAnim= AnimatedVectorDrawableCompat.create(context,R.drawable.login_input_vector_merge_anim);
 
         noAnimBg= VectorDrawableCompat.create(context.getResources(), R.drawable.login_input_no_anim_vector_drawable,null);
-        mEditTextContainer.setBackground(noAnimBg);
+
+        if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            mEditTextContainer.setBackgroundDrawable(noAnimBg);
+        } else {
+            mEditTextContainer.setBackground(noAnimBg);
+        }
+
 
         mEditText.setOnFocusChangeListener(new AOnFocusChangeListener(){
             @Override
@@ -192,7 +199,12 @@ public  class AnimEditText extends LinearLayout {
                 /**
                  * 只有当为空值的时候才提示hit，和分开动画
                  */
-                mEditTextContainer.setBackground(mSplitAnim);
+                if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    mEditTextContainer.setBackgroundDrawable(mSplitAnim);
+                } else {
+                    mEditTextContainer.setBackground(mSplitAnim);
+                }
+
                 Drawable drawable =    mEditTextContainer.getBackground();
                 if (drawable instanceof Animatable){
                     ((Animatable) drawable).start();
@@ -205,7 +217,12 @@ public  class AnimEditText extends LinearLayout {
                 /**
                  * 只有当分开的拾柴可以触发合并动画
                  */
-                mEditTextContainer.setBackground(mMergeAnim);
+                if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    mEditTextContainer.setBackgroundDrawable(mMergeAnim);
+                } else {
+                    mEditTextContainer.setBackground(mMergeAnim);
+                }
+
                 Drawable drawable =    mEditTextContainer.getBackground();
                 if (drawable instanceof Animatable){
                     ((Animatable) drawable).start();
@@ -252,7 +269,7 @@ public  class AnimEditText extends LinearLayout {
 
         }
 
-        @SuppressLint("NewApi")
+        
         @Override
         public void afterTextChanged(Editable s) {
 
@@ -262,13 +279,19 @@ public  class AnimEditText extends LinearLayout {
              */
             if(TextUtils.isEmpty(mEditText.getText().toString())&&!mIsSplit)
             {
-                mEditTextContainer.setBackground(mSplitAnim);
+
+                if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    mEditTextContainer.setBackgroundDrawable(mSplitAnim);
+                } else {
+                    mEditTextContainer.setBackground(mSplitAnim);
+                }
                 Drawable drawable =    mEditTextContainer.getBackground();
                 if (drawable instanceof Animatable){
                     ((Animatable) drawable).start();
                     mIsSplit=true;
                 }
                 Flowable.timer(350, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<Long>() {
                             @Override
                             public void accept(@NonNull Long aLong) throws Exception {
@@ -283,13 +306,19 @@ public  class AnimEditText extends LinearLayout {
 
             if(!TextUtils.isEmpty(mEditText.getText().toString())&&mIsSplit)
             {
-                mEditTextContainer.setBackground(mMergeAnim);
+                if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    mEditTextContainer.setBackgroundDrawable(mMergeAnim);
+                } else {
+                    mEditTextContainer.setBackground(mMergeAnim);
+                }
+           
                 Drawable drawable =    mEditTextContainer.getBackground();
                 if (drawable instanceof Animatable){
                     ((Animatable) drawable).start();
                     mIsSplit=false;
                 }
                 Flowable.timer(300, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<Long>() {
                             @Override
                             public void accept(@NonNull Long aLong) throws Exception {
