@@ -19,6 +19,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <!--<ImageView-->
+        <!--app:srcCompat="@drawable/login_input_vector_split_anim"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dip" />-->
     <aimissu.com.animationinputbox.AnimEditText
         android:layout_marginTop="25dip"
         android:layout_width="match_parent"

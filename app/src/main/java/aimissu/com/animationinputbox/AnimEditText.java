@@ -1,5 +1,6 @@
 package aimissu.com.animationinputbox;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,7 +13,10 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatDelegate;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -37,12 +41,13 @@ import io.reactivex.functions.Consumer;
  */
 
 public  class AnimEditText extends LinearLayout {
+
     private TextInputEditText mEditText;
     private TextInputLayout mEditTextContainer;
 
-    private AnimatedVectorDrawable mSplitAnim;
-    private AnimatedVectorDrawable mMergeAnim;
-    private Drawable noAnimBg;
+    private AnimatedVectorDrawableCompat mSplitAnim;
+    private AnimatedVectorDrawableCompat mMergeAnim;
+    private VectorDrawableCompat noAnimBg;
 
     private String mHit;
     private float mHitSize;
@@ -54,19 +59,22 @@ public  class AnimEditText extends LinearLayout {
     private int mMaxLength;
     private boolean mIsNumber;
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+
+    @SuppressLint("NewApi")
     public AnimEditText(Context context) {
         super(context);
        initView(context,null,-1);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+
+    @SuppressLint("NewApi")
     public AnimEditText(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView(context, attrs,-1);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+
+    @SuppressLint("NewApi")
     public AnimEditText(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
@@ -74,7 +82,8 @@ public  class AnimEditText extends LinearLayout {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
+    @SuppressLint("NewApi")
     public AnimEditText(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initView(context, attrs,defStyleAttr);
@@ -85,7 +94,8 @@ public  class AnimEditText extends LinearLayout {
         super.onLayout(changed, l, t, r, b);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+
+    @SuppressLint("NewApi")
     public void initView(Context context, AttributeSet attrs, int defStyleRes)
     {
         LayoutInflater.from(context).inflate(R.layout.view_anim_edit_text, this);
@@ -144,10 +154,14 @@ public  class AnimEditText extends LinearLayout {
 
 
 
-        mSplitAnim = (AnimatedVectorDrawable) ContextCompat.getDrawable(context,R.drawable.login_input_vector_split_anim);
-        mMergeAnim = (AnimatedVectorDrawable) ContextCompat.getDrawable(context,R.drawable.login_input_vector_merge_anim);
+//        mSplitAnim = (AnimatedVectorDrawable) ContextCompat.getDrawable(context,R.drawable.login_input_vector_split_anim);
+//        mMergeAnim = (AnimatedVectorDrawable) ContextCompat.getDrawable(context,R.drawable.login_input_vector_merge_anim);
 
-        noAnimBg= ContextCompat.getDrawable(context,R.drawable.login_input_no_anim_vector_drawable);
+
+        mSplitAnim= AnimatedVectorDrawableCompat.create(context,R.drawable.login_input_vector_split_anim);
+        mMergeAnim= AnimatedVectorDrawableCompat.create(context,R.drawable.login_input_vector_merge_anim);
+
+        noAnimBg= VectorDrawableCompat.create(context.getResources(), R.drawable.login_input_no_anim_vector_drawable,null);
         mEditTextContainer.setBackground(noAnimBg);
 
         mEditText.setOnFocusChangeListener(new AOnFocusChangeListener(){
@@ -164,8 +178,9 @@ public  class AnimEditText extends LinearLayout {
     public abstract class AOnFocusChangeListener implements OnFocusChangeListener {
 
 
-        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+
+
+        @SuppressLint("NewApi")
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
             setHitNotice();
@@ -237,7 +252,7 @@ public  class AnimEditText extends LinearLayout {
 
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        @SuppressLint("NewApi")
         @Override
         public void afterTextChanged(Editable s) {
 
