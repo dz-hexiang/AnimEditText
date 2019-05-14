@@ -1,5 +1,5 @@
 # AnimEditText
-vector drawable EditText 向量动画的输入框
+vector drawable EditText 矢量动画的输入框
 
 
 对于 Android 5.0（API 级别 21）及更高版本，您可以使用 AnimatedVectorDrawable 类为 VectorDrawable 类的属性添加动画。
